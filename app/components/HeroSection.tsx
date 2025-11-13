@@ -1,50 +1,52 @@
 "use client";
-import Image from "next/image";
+
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function HeroSection() {
     return (
-        <section className="relative flex items-center justify-center overflow-hidden min-h-[90vh]">
-            <Image
-                src="/BannerImg.jpeg"
-                alt="Indian spices background"
-                fill
-                priority
-                className="object-cover object-center"
-                style={{ filter: "brightness(0.9) saturate(1.1)" }}
-            />
-            <div className="absolute inset-0 bg-linear-to-b from-emerald-950/70 via-emerald-800/50 to-emerald-950/80" />
-            <div className="relative z-10 max-w-4xl mx-auto px-6 text-center text-white">
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-tight drop-shadow-lg"
+        <section className="relative min-h-screen flex items-center pt-0">
+            {/* Background Image */}
+            <div className="absolute inset-0 -z-10">
+                <img
+                    src="/hero-farm.png"
+                    alt="Farmland and agriculture"
+                    className="w-full h-full object-cover object-center"
+                    style={{ filter: "brightness(0.65) contrast(0.95)" }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-green-900/30 via-green-200/10 to-white/40" />
+            </div>
+
+            {/* Text Content */}
+            <div className="max-w-7xl mx-auto px-6 md:px-10 py-16">
+                <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.9 }}
+                    className="max-w-3xl"
                 >
-                    Bringing India’s <span className="text-emerald-300">Flavors</span> to the World
-                </motion.h1>
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    className="mt-6 text-lg md:text-xl text-emerald-100 max-w-2xl mx-auto leading-relaxed"
-                >
-                    Exporting authentic Indian spices with sustainable sourcing and uncompromising quality.
-                </motion.p>
-                <div className="mt-10 flex flex-wrap justify-center gap-4">
-                    <a
-                        href="#products"
-                        className="px-8 py-3 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 shadow-lg transition-transform hover:scale-105"
-                    >
-                        Explore Products
-                    </a>
-                    <a
-                        href="#contact"
-                        className="px-8 py-3 border border-white/70 rounded-md bg-white/20 hover:bg-white/30 text-white transition-transform hover:scale-105"
-                    >
-                        Contact Sales
-                    </a>
-                </div>
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-sm">
+                        Bringing India's Finest Agricultural Produce to the World
+                    </h1>
+
+                    <p className="mt-4 text-lg text-green-50">
+                        Fresh fruits, premium vegetables, whole spices and eco-friendly
+                        solutions — sustainably sourced, export-ready and globally compliant.
+                    </p>
+
+                    <div className="mt-6 flex flex-wrap gap-3">
+
+                        <Link href="/products" className="inline-block px-5 py-3 bg-green-600 text-white rounded-md shadow hover:bg-green-700 transition">
+                            View Products
+                        </Link>
+                        <a
+                            href="#contact"
+                            className="inline-block px-5 py-3 border border-white/70 text-white rounded-md hover:bg-white/10 transition"
+                        >
+                            Contact Sales
+                        </a>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

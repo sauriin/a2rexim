@@ -3,92 +3,18 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Globe2 } from "lucide-react";
+import Navbar from "./components/Navbar";
+import HeroSection from "./components/HeroSection";
+import Footer from "./components/Footer";
 
-export default function HeroNavbar() {
+export default function Home() {
   const topRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <div ref={topRef} className="min-h-screen text-[#123A2B] font-sans">
 
-      {/* NAVBAR */}
-      <motion.header
-        className="fixed w-full top-0 z-50 bg-white/70 backdrop-blur-md border-b border-green-100"
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7 }}
-      >
-        <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-md flex items-center justify-center bg-green-100 border border-green-200">
-              <Globe2 className="w-5 h-5 text-green-700" />
-            </div>
-            <div className="text-lg font-semibold text-green-800">A2R EXIM</div>
-          </div>
-
-          <nav className="hidden md:flex items-center gap-8 text-green-700">
-            <a href="#about" className="hover:text-green-900 transition">About</a>
-            <a href="#products" className="hover:text-green-900 transition">Products</a>
-            <a href="#services" className="hover:text-green-900 transition">Services</a>
-            <a href="#contact" className="hover:text-green-900 transition">Contact</a>
-            <a
-              href="#contact"
-              className="ml-4 px-4 py-2 rounded-md bg-green-700 text-white hover:bg-green-800 transition"
-            >
-              Get Quote
-            </a>
-          </nav>
-
-          <div className="md:hidden text-green-700">Menu</div>
-        </div>
-      </motion.header>
-
-      {/* HERO */}
-      <section className="relative min-h-screen flex items-center pt-0">
-        <div className="absolute inset-0 -z-10">
-          <img
-            src="/hero-farm.png"
-            alt="Farmland and agriculture"
-            className="w-full h-full object-cover object-center"
-            style={{ filter: "brightness(0.65) contrast(0.95)" }}
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-b from-green-900/30 via-green-200/10 to-white/40" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 md:px-10 py-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9 }}
-            className="max-w-3xl"
-          >
-            <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-sm">
-              Bringing India's Finest Agricultural Produce to the World
-            </h1>
-
-            <p className="mt-4 text-lg text-green-50">
-              Fresh fruits, premium vegetables, whole spices and eco-friendly
-              solutions — sustainably sourced, export-ready and globally compliant.
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="#products"
-                className="inline-block px-5 py-3 bg-green-600 text-white rounded-md shadow hover:bg-green-700 transition"
-              >
-                View Products
-              </a>
-
-              <a
-                href="#contact"
-                className="inline-block px-5 py-3 border border-white/70 text-white rounded-md hover:bg-white/10 transition"
-              >
-                Contact Sales
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <Navbar />
+      <HeroSection />
 
       {/* ABOUT SECTION */}
       <section id="about" className="py-20 bg-white">
@@ -230,6 +156,8 @@ export default function HeroNavbar() {
           </div>
         </div>
       </section>
+      {/* FOOTER */}
+      <Footer/>
     </div>
   );
 }
