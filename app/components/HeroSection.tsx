@@ -40,7 +40,7 @@ export default function HeroSection() {
                             View Products
                         </Link>
                         <Link
-                            href="/qetQuote"
+                            href="/getQuote"
                             className="inline-block px-5 py-3 border border-white/70 text-white rounded-md hover:bg-white/10 transition"
                         >
                             Contact Sales
