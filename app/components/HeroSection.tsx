@@ -14,7 +14,7 @@ export default function HeroSection() {
                     className="w-full h-full object-cover object-center"
                     style={{ filter: "brightness(0.65) contrast(0.95)" }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-green-900/30 via-green-200/10 to-white/40" />
+                <div className="absolute inset-0 bg-linear-to-b from-green-900/30 via-green-200/10 to-white/40" />
             </div>
 
             {/* Text Content */}
