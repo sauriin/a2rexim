@@ -2,41 +2,19 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-    Mail,
-    Phone,
-    MapPin,
-    Send,
-    User,
-    MessageSquare,
-} from "lucide-react";
+import { Mail, Phone, MapPin, Send, User, MessageSquare } from "lucide-react";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 export default function ContactPage() {
-    const [form, setForm] = useState({
-        name: "",
-        email: "",
-        message: "",
-    });
-
-    const [errors, setErrors] = useState({
-        name: "",
-        email: "",
-        message: "",
-    });
+    const [form, setForm] = useState({ name: "", email: "", message: "" });
+    const [errors, setErrors] = useState({ name: "", email: "", message: "" });
 
     const validate = () => {
         let valid = true;
+        const newErrors: any = { name: "", email: "", message: "" };
 
-        const newErrors: any = {
-            name: "",
-            email: "",
-            message: "",
-        };
-
-        // NAME VALIDATION
         if (!form.name.trim()) {
             newErrors.name = "Name is required.";
             valid = false;
@@ -45,7 +23,6 @@ export default function ContactPage() {
             valid = false;
         }
 
-        // EMAIL VALIDATION
         if (!form.email.trim()) {
             newErrors.email = "Email is required.";
             valid = false;
@@ -54,7 +31,6 @@ export default function ContactPage() {
             valid = false;
         }
 
-        // MESSAGE VALIDATION
         if (!form.message.trim()) {
             newErrors.message = "Message is required.";
             valid = false;
@@ -80,37 +56,44 @@ export default function ContactPage() {
 
     return (
         <div className="min-h-screen bg-[#F8FFF9] text-[#123A2B] font-sans">
-            {/* NAVBAR */}
             <Navbar />
 
-            {/* PAGE HEADER */}
-            <div className="pt-32 pb-10 px-6 md:px-10 text-center">
-                <h1 className="text-4xl font-bold text-green-800">Contact Us</h1>
-                <p className="text-green-700 mt-2">
+            {/* HEADER (same style as About page) */}
+            <div
+                className="w-full py-28 text-center"
+                style={{
+                    background: "linear-gradient(to bottom, #E8FBEA, #F4FFF5)",
+                }}
+            >
+                <h1 className="text-4xl md:text-5xl font-bold text-green-900 drop-shadow-sm">
+                    Contact Us
+                </h1>
+
+                <p className="text-green-800 mt-4 text-lg max-w-3xl mx-auto">
                     We’re here to help you. Reach out anytime!
                 </p>
             </div>
 
-            {/* MAP LEFT • FORM RIGHT */}
-            <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto px-6 md:px-10 pb-20">
-
-                {/* LEFT: MAP */}
+            {/* MAP + FORM */}
+            <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto px-6 md:px-10 pb-20 mt-14">
+                {/* MAP */}
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="rounded-xl overflow-hidden shadow-md border border-green-100 h-[400px]"
+                    className="rounded-xl overflow-hidden shadow-md border border-green-100 h-[420px]"
                 >
                     <iframe
+                        title="Vadodara map"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.425353945811!2d73.17121957503035!3d22.299405779689763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc8a5e7a2a8df%3A0x8e75f1ef1a3040cc!2sVadodara%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000001111!5m2!1sen!2sin"
                         width="100%"
                         height="100%"
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
-                    ></iframe>
+                    />
                 </motion.div>
 
-                {/* RIGHT: FORM */}
+                {/* FORM */}
                 <motion.form
                     onSubmit={handleSubmit}
                     initial={{ opacity: 0, x: 30 }}
@@ -130,11 +113,17 @@ export default function ContactPage() {
                         <input
                             type="text"
                             value={form.name}
-                            onChange={(e) => setForm({ ...form, name: e.target.value })}
+                            onChange={(e) =>
+                                setForm({ ...form, name: e.target.value })
+                            }
                             className="w-full mt-2 p-3 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500"
                             placeholder="Enter your name"
                         />
-                        {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name}</p>}
+                        {errors.name && (
+                            <p className="text-red-600 text-sm mt-1">
+                                {errors.name}
+                            </p>
+                        )}
                     </div>
 
                     {/* EMAIL */}
@@ -145,14 +134,19 @@ export default function ContactPage() {
                         <input
                             type="email"
                             value={form.email}
-                            onChange={(e) => setForm({ ...form, email: e.target.value })}
+                            onChange={(e) =>
+                                setForm({ ...form, email: e.target.value })
+                            }
                             className="w-full mt-2 p-3 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500"
                             placeholder="Enter your email"
                         />
-                        {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
+                        {errors.email && (
+                            <p className="text-red-600 text-sm mt-1">
+                                {errors.email}
+                            </p>
+                        )}
                     </div>
 
-                    {/* MESSAGE */}
                     {/* MESSAGE */}
                     <div className="mb-5">
                         <label className="text-green-800 font-medium flex items-center gap-2">
@@ -162,34 +156,35 @@ export default function ContactPage() {
                         <textarea
                             value={form.message}
                             onChange={(e) => {
-                                const value = e.target.value;
-
-                                // Enforce maximum length
-                                if (value.length <= 300) {
-                                    setForm({ ...form, message: value });
-                                }
-
-                                if (errors.message) validate();
+                                if (e.target.value.length <= 300)
+                                    setForm({
+                                        ...form,
+                                        message: e.target.value,
+                                    });
                             }}
-                            className={`w-full mt-2 p-3 border rounded-lg h-32 focus:ring-2 focus:ring-green-500
-        ${errors.message ? "border-red-500" : "border-green-200"}
-    `}
+                            className={`w-full mt-2 p-3 border rounded-lg h-32 focus:ring-2 focus:ring-green-500 ${errors.message
+                                    ? "border-red-500"
+                                    : "border-green-200"
+                                }`}
                             placeholder="Write your message..."
                         />
 
-                        {/* Character Counter */}
                         <p
-                            className={`text-sm mt-1 ${form.message.length > 280 ? "text-red-600 font-semibold" : "text-green-700"
+                            className={`text-sm mt-1 ${form.message.length > 280
+                                    ? "text-red-600 font-semibold"
+                                    : "text-green-700"
                                 }`}
                         >
                             {form.message.length} / 300 characters
                         </p>
 
-                        {/* ERROR MESSAGE */}
                         {errors.message && (
-                            <p className="text-red-600 text-sm mt-1">{errors.message}</p>
+                            <p className="text-red-600 text-sm mt-1">
+                                {errors.message}
+                            </p>
                         )}
                     </div>
+
                     {/* SUBMIT */}
                     <button
                         type="submit"
@@ -199,7 +194,7 @@ export default function ContactPage() {
                     </button>
                 </motion.form>
             </div>
-            {/* FOOTER */}
+
             <Footer />
         </div>
     );

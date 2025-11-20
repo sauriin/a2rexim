@@ -1,54 +1,85 @@
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
+import type { Metadata } from "next";
+
+const categories = {
+    "whole-spices": {
+        title: "Whole Spices",
+        desc: "Premium export-quality whole spices sourced from trusted growers.",
+        items: [
+            "Cumin", "Coriander", "Chilli Flakes", "Black Pepper",
+            "Clove Seed", "Cardamom", "Black Cumin", "Bay Leaf",
+            "Ajwain", "Cinnamon", "Mace", "Star Anise",
+            "Imli (Tamarind)", "Nutmeg", "Fennel Seeds", "Methi Seeds",
+        ],
+        img: "/spice.avif",
+    },
+
+    vegetables: {
+        title: "Vegetables",
+        desc: "Fresh, farm-grown vegetables exported with strict quality checks.",
+        items: ["Onion", "Potato", "Bell Pepper", "Drumstick", "Green Chillies", "Lemon", "Mushroom"],
+        img: "/vegetables.webp",
+    },
+
+    fruits: {
+        title: "Fruits",
+        desc: "Naturally ripened tropical fruits packed with flavor and freshness.",
+        items: ["Banana", "Coconut", "Grape", "Mango", "Apple", "Pomegranate", "Orange"],
+        img: "/fruits.jpg",
+    },
+
+    "eco-friendly-products": {
+        title: "Eco-Friendly Products",
+        desc: "Sustainable biodegradable plates, cups and disposable products.",
+        items: ["Biodegradable Plates", "Biodegradable Cups"],
+        img: "/eco.avif",
+    },
+};
+
+// Dynamic SEO
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+    const { slug } = await params;
+    const category = categories[slug as keyof typeof categories];
+
+    if (!category) {
+        return {
+            title: "Category Not Found | A2R EXIM",
+            description: "This category does not exist.",
+        };
+    }
+
+    return {
+        title: `${category.title}`,
+        description: category.desc,
+        openGraph: {
+            title: category.title,
+            description: category.desc,
+            images: [{ url: category.img }],
+            url: `/products/${slug}`,
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: category.title,
+            description: category.desc,
+            images: [category.img],
+        },
+        alternates: {
+            canonical: `/products/${slug}`,
+        },
+    };
+}
 
 export default async function CategoryPage({
     params,
 }: {
     params: Promise<{ slug: string }>;
 }) {
-    const { slug } = await params; // 🔥 FIX: await the params
-
-    const categories = {
-        "whole-spices": {
-            title: "Whole Spices",
-            desc: "Premium export-quality whole spices sourced from trusted growers.",
-            items: [
-                "Cumin", "Coriander", "Chilli Flakes", "Black Pepper",
-                "Clove Seed", "Cardamom", "Black Cumin", "Bay Leaf",
-                "Ajwain", "Cinnamon", "Mace", "Star Anise",
-                "Imli (Tamarind)", "Nutmeg", "Fennel Seeds", "Methi Seeds",
-            ],
-            img: "/spice.avif",
-        },
-
-        vegetables: {
-            title: "Vegetables",
-            desc: "Fresh, farm-grown vegetables exported with strict quality checks.",
-            items: [
-                "Onion", "Potato", "Bell Pepper", "Drumstick",
-                "Green Chillies", "Lemon", "Mushroom",
-            ],
-            img: "/vegetables.webp",
-        },
-
-        fruits: {
-            title: "Fruits",
-            desc: "Naturally ripened tropical fruits packed with flavor and freshness.",
-            items: [
-                "Banana", "Coconut", "Grape", "Mango",
-                "Apple", "Pomegranate", "Orange",
-            ],
-            img: "/fruits.jpg",
-        },
-
-        "eco-friendly-products": {
-            title: "Eco-Friendly Products",
-            desc: "Sustainable biodegradable plates, cups and disposable products.",
-            items: ["Biodegradable Plates", "Biodegradable Cups"],
-            img: "/eco.avif",
-        },
-    };
-
+    const { slug } = await params;
     const category = categories[slug as keyof typeof categories];
 
     if (!category) {
