@@ -52,15 +52,7 @@ export default function ProductsPage() {
             slug: "fruits",
             title: "Fruits",
             desc: "Naturally ripened tropical fruits packed with flavor and freshness.",
-            items: [
-                "Banana",
-                "Coconut",
-                "Grape",
-                "Mango",
-                "Apple",
-                "Pomegranate",
-                "Orange",
-            ],
+            items: ["Banana", "Coconut", "Grape", "Mango", "Apple", "Pomegranate", "Orange"],
             img: "/fruits.jpg",
         },
 
@@ -75,9 +67,10 @@ export default function ProductsPage() {
 
     return (
         <div className="min-h-screen bg-[#F8FFF9] text-[#123A2B] font-sans">
-
+            {/* NAVBAR */}
             <Navbar />
 
+            {/* PAGE CONTENT */}
             <div className="max-w-7xl mx-auto px-6 md:px-10 pt-32 pb-20">
 
                 {/* PAGE TITLE */}
@@ -88,45 +81,49 @@ export default function ProductsPage() {
                     Explore our export-grade agricultural produce and eco-friendly products.
                 </p>
 
-                {/* CATEGORY SECTIONS */}
+                {/* CATEGORY GRID */}
                 <div className="grid md:grid-cols-2 gap-10">
                     {categories.map((cat, i) => (
-                        <Link key={i} href={`/products/${cat.slug}`}>
+                        <Link key={i} href={`/products/${cat.slug}`} className="block">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 whileHover={{ scale: 1.03 }}
                                 transition={{ duration: 0.3 }}
-                                className="bg-white rounded-lg shadow-md border border-green-100 p-6 hover:shadow-lg cursor-pointer"
+                                className="bg-white rounded-lg shadow-md border border-green-100 p-6 hover:shadow-lg cursor-pointer flex flex-col h-full min-h-[350px]
+"
                             >
-                                {/* IMAGE */}
-                                <div className="overflow-hidden rounded-md">
+
+                                <div className="rounded-md overflow-hidden h-40">
                                     <img
                                         src={cat.img}
                                         alt={cat.title}
-                                        className="w-full h-40 object-cover scale-110 transition-all duration-500"
+                                        className="w-full h-full object-cover transition-all duration-300"
                                     />
                                 </div>
 
-                                {/* TITLE */}
-                                <h2 className="text-2xl font-semibold text-green-800 mt-4">
-                                    {cat.title}
-                                </h2>
+                                <div className="flex flex-col mt-4 grow">
+                                    <h2 className="text-2xl font-semibold text-green-800">
+                                        {cat.title}
+                                    </h2>
 
-                                <p className="text-green-700 text-sm mt-1">{cat.desc}</p>
+                                    <p className="text-green-700 text-sm mt-1">
+                                        {cat.desc}
+                                    </p>
 
-                                {/* ITEMS */}
-                                <p className="text-green-800 text-sm mt-3">
-                                    <span className="font-semibold">Includes:</span>{" "}
-                                    {cat.items.join(", ")}
-                                </p>
+                                    <p className="text-green-800 text-sm mt-2 pt-3">
+                                        <span className="font-semibold">Includes:</span>{" "}
+                                        {cat.items.join(", ")}
+                                    </p>
+                                </div>
                             </motion.div>
                         </Link>
                     ))}
                 </div>
             </div>
 
+            {/* FOOTER */}
             <Footer />
         </div>
     );

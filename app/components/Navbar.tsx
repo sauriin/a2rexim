@@ -9,7 +9,9 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const linkStyle = (path: string) =>
-    `hover:text-green-900 transition ${pathname === path ? "font-bold underline underline-offset-4" : ""
+    `hover:text-green-900 transition ${pathname === path || pathname.startsWith(path + "/")
+      ? "font-bold underline underline-offset-4"
+      : ""
     }`;
 
   return (
@@ -36,18 +38,21 @@ export default function Navbar() {
           <Link href="/" className={linkStyle("/")}>
             Home
           </Link>
+
           <Link href="/products" className={linkStyle("/products")}>
             Products
           </Link>
+
           <Link href="/about" className={linkStyle("/about")}>
             About
           </Link>
-          <Link href="#contact" className="hover:text-green-900 transition">
+
+          <Link href="/contact" className={linkStyle("/contact")}>
             Contact
           </Link>
 
           <a
-            href="#contact"
+            href="/getQuote"
             className="ml-4 px-4 py-2 rounded-md bg-green-700 text-white hover:bg-green-800 transition"
           >
             Get Quote

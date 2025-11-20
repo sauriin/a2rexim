@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
     return (
         <footer className="bg-green-900 text-green-50 py-14 mt-0">
@@ -16,12 +18,32 @@ export default function Footer() {
                 <div>
                     <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
                     <ul className="space-y-2 text-green-200 text-sm">
-                        <li><a href="#about" className="hover:text-white transition">About Us</a></li>
-                        <li><a href="#categories" className="hover:text-white transition">Categories</a></li>
-                        <li><a href="#services" className="hover:text-white transition">Services</a></li>
-                        <li><a href="#contact" className="hover:text-white transition">Contact</a></li>
+                        <li>
+                            <Link href="/" className="hover:text-white transition">
+                                Home
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/products" className="hover:text-white transition">
+                                Products
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/about" className="hover:text-white transition">
+                                About Us
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/contact" className="hover:text-white transition">
+                                Contact
+                            </Link>
+                        </li>
                     </ul>
                 </div>
+
 
                 {/* CONTACT INFO */}
                 <div>
@@ -36,7 +58,7 @@ export default function Footer() {
                                 <path d="M13 13h4v8h-4z"></path>
                                 <path d="M7 13h4v8h-4z"></path>
                             </svg>
-                            <span>Surat, Gujarat, India</span>
+                            <span>Vadodara, Gujarat, India</span>
                         </li>
 
                         {/* Email */}

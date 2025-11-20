@@ -39,12 +39,12 @@ export default function HeroSection() {
                         <Link href="/products" className="inline-block px-5 py-3 bg-green-600 text-white rounded-md shadow hover:bg-green-700 transition">
                             View Products
                         </Link>
-                        <a
-                            href="#contact"
+                        <Link
+                            href="/qetQuote"
                             className="inline-block px-5 py-3 border border-white/70 text-white rounded-md hover:bg-white/10 transition"
                         >
                             Contact Sales
-                        </a>
+                        </Link>
                     </div>
                 </motion.div>
             </div>
